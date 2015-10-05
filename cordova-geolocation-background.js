@@ -211,6 +211,40 @@ for (var key in window) {
     console.log('GeolocationBG: send: init');
     console.log(JSON.stringify(location));
 
+    var locationObject = {};
+
+    if ('coords' in location) {
+        locationObject.coords = {};
+
+        if ('latitude' in location.coords) {
+            locationObject.coords.latitude = location.coords.latitude;
+        }
+        if ('longitude' in location.coords) {
+            locationObject.coords.longitude = location.coords.longitude;
+        }
+        if ('accuracy' in location.coords) {
+            locationObject.coords.accuracy = location.coords.accuracy;
+        }
+        if ('altitude' in location.coords) {
+            locationObject.coords.altitude = location.coords.altitude;
+        }
+        if ('altitudeAccuracy' in location.coords) {
+            locationObject.coords.altitudeAccuracy = location.coords.altitudeAccuracy;
+        }
+        if ('heading' in location.coords) {
+            locationObject.coords.heading = location.coords.heading;
+        }
+        if ('speed' in location.coords) {
+            locationObject.coords.speed = location.coords.speed;
+        }
+    }
+
+    if ('timestamp' in location) {
+        locationObject.timestamp = location.timestamp;
+    }
+    
+    location = locationObject;
+
     if (!_.isObject(location)) {
       console.error('GeolocationBG: send: error - location is invalid - not an object');
       return;
